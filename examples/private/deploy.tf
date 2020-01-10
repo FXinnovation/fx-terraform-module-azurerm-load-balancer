@@ -1,11 +1,11 @@
 module "rg_demo" {
-  source   = "git::ssh://git@scm.dazzlingwrench.fxinnovation.com:2222/fxinnovation-public/terraform-module-azurerm-resource-group.git?ref=0.2.0"
+  source   = "git::https://scm.dazzlingwrench.fxinnovation.com/fxinnovation-public/terraform-module-azurerm-resource-group.git?ref=0.2.0"
   location = "francecentral"
   name     = "tftest-sa"
 }
 
 module "vnet_demo" {
-  source              = "git::ssh://git@scm.dazzlingwrench.fxinnovation.com:2222/fxinnovation-public/terraform-module-azurerm-virtualnetwork.git?ref=v0.2"
+  source              = "git::https://scm.dazzlingwrench.fxinnovation.com/fxinnovation-public/terraform-module-azurerm-virtualnetwork.git?ref=v0.2"
   resource_group_name = module.rg_demo.name
   vnet_name           = "fxcozca1dgenvn001"
   vnet_address_space  = ["10.0.0.0/16"]
@@ -13,7 +13,7 @@ module "vnet_demo" {
 }
 
 module "subnets" {
-  source               = "git::ssh://git@scm.dazzlingwrench.fxinnovation.com:2222/fxinnovation-public/terraform-module-azurerm-virtualnetwork-subnet.git?ref=0.2.1"
+  source               = "git::https://scm.dazzlingwrench.fxinnovation.com/fxinnovation-public/terraform-module-azurerm-virtualnetwork-subnet.git?ref=0.2.1"
   resource_group_name  = module.rg_demo.name
   virtual_network_name = module.vnet_demo.virtual_network_name
   subnets_config = {
@@ -30,7 +30,7 @@ module "subnets" {
   }
 }
 
-module "lb_private" {
+module "private_lb" {
   source                         = "../.."
   resource_group_name            = module.rg_demo.name
   location                       = "francecentral"

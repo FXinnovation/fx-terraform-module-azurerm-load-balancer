@@ -44,7 +44,7 @@ variable "subnet_ids" {
 
 variable "nat_rules" {
   description = "Protocols to be used for remote vm access."
-  type        = any
+  type        = map
 }
 
 variable "enable_floating_ip" {
@@ -55,7 +55,7 @@ variable "enable_floating_ip" {
 
 variable "lbrules" {
   description = "Protocols to be used for lb health probes and rules."
-  type        = any
+  type        = map
 }
 
 variable "interval" {
@@ -75,25 +75,22 @@ variable "frontend_ip_configuration_name" {
 
 variable "private_ip_address" {
   description = "Private ip address"
-  type        = string
   default     = ""
 }
 
 variable "subnet_id" {
   description = "ID os the subnet"
-  type        = string
   default     = ""
 }
 
 variable "nat_pool_enabled" {
   description = "Boolean flag to enable nat pool"
   default     = false
-  type        = bool
 }
 
 variable "backend_pools" {
   description = "Name of the backend pool which will be created"
-  type        = any
+  type        = map
 }
 
 variable "tags" {
