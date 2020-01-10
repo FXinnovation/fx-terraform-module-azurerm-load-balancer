@@ -12,8 +12,8 @@ output "id_private" {
 output "id_probe" {
   value = element(
     concat(
-      azurerm_lb_probe.this_probe_private.*.id,
-      azurerm_lb_probe.this_probe_public.*.id,
+      [for x in azurerm_lb_probe.this_probe_private : x.id],
+      [for x in azurerm_lb_probe.this_probe_public : x.id],
       list("")
     ),
     0
@@ -23,8 +23,8 @@ output "id_probe" {
 output "id_nat_rule" {
   value = element(
     concat(
-      azurerm_lb_nat_rule.this_nat_rule_private.*.id,
-      azurerm_lb_nat_rule.this_nat_rule_public.*.id,
+      [for x in azurerm_lb_nat_rule.this_nat_rule_private : x.id],
+      [for x in azurerm_lb_nat_rule.this_nat_rule_public : x.id],
       list("")
     ),
     0
@@ -43,8 +43,8 @@ output "public_ip_id" {
 output "id_backend_pool" {
   value = element(
     concat(
-      azurerm_lb_backend_address_pool.this_private.*.id,
-      azurerm_lb_backend_address_pool.this_public.*.id,
+      [for x in azurerm_lb_backend_address_pool.this_private : x.id],
+      [for x in azurerm_lb_backend_address_pool.this_public : x.id],
       list("")
     ),
     0
