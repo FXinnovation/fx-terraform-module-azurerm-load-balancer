@@ -53,7 +53,7 @@ variable "enable_floating_ip" {
   default     = false
 }
 
-variable "lbrules" {
+variable "lb_rules" {
   description = "Protocols to be used for lb health probes and rules."
   type        = map
 }

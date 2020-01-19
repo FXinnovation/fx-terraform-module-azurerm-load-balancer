@@ -1,5 +1,5 @@
 ###
-# Private-LB
+# Private load balancer
 ###
 
 resource "azurerm_lb" "this_private" {
@@ -59,7 +59,7 @@ resource "azurerm_lb_nat_rule" "this_nat_rule_private" {
 }
 
 resource "azurerm_lb_probe" "this_probe_private" {
-  for_each            = var.enabled && var.type == "private" ? var.lbrules : {}
+  for_each            = var.enabled && var.type == "private" ? var.lb_rules : {}
   name                = each.value["probe_name"]
   port                = each.value["port_probe"]
   protocol            = each.value["protocol_probe"]
@@ -70,11 +70,11 @@ resource "azurerm_lb_probe" "this_probe_private" {
 }
 
 ###
-# LB Rules
+# private load balancer rules
 ###
 
 resource "azurerm_lb_rule" "this_lb_rule_private" {
-  for_each                       = var.enabled && var.type == "private" ? var.lbrules : {}
+  for_each                       = var.enabled && var.type == "private" ? var.lb_rules : {}
   name                           = each.value["rule_name"]
   loadbalancer_id                = azurerm_lb.this_private[0].id
   resource_group_name            = var.resource_group_name
@@ -89,7 +89,7 @@ resource "azurerm_lb_rule" "this_lb_rule_private" {
 }
 
 ###
-# Public-LB
+# public load balancer
 ###
 
 resource "azurerm_public_ip" "this" {
@@ -156,7 +156,7 @@ resource "azurerm_lb_nat_rule" "this_nat_rule_public" {
 }
 
 resource "azurerm_lb_probe" "this_probe_public" {
-  for_each            = var.enabled && var.type != "private" ? var.lbrules : {}
+  for_each            = var.enabled && var.type != "private" ? var.lb_rules : {}
   name                = each.value["probe_name"]
   port                = each.value["port_probe"]
   protocol            = each.value["protocol_probe"]
@@ -167,11 +167,11 @@ resource "azurerm_lb_probe" "this_probe_public" {
 }
 
 ###
-# LB Rules
+# public load balancer rules
 ###
 
 resource "azurerm_lb_rule" "this_lb_rule_public" {
-  for_each                       = var.enabled && var.type != "private" ? var.lbrules : {}
+  for_each                       = var.enabled && var.type != "private" ? var.lb_rules : {}
   name                           = each.value["rule_name"]
   loadbalancer_id                = azurerm_lb.this_public[0].id
   resource_group_name            = var.resource_group_name

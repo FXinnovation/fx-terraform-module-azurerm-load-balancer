@@ -1,4 +1,4 @@
-module "rg_demo" {
+module "resource_group_demo" {
   source   = "git::https://scm.dazzlingwrench.fxinnovation.com/fxinnovation-public/terraform-module-azurerm-resource-group.git?ref=0.2.0"
   location = "francecentral"
   name     = "tftest-sa"
@@ -6,7 +6,7 @@ module "rg_demo" {
 
 module "public_lb" {
   source                         = "../.."
-  resource_group_name            = module.rg_demo.name
+  resource_group_name            = module.resource_group_demo.name
   location                       = "francecentral"
   loadbalancer_name              = "fxlb-public"
   method                         = "Dynamic"
@@ -21,8 +21,8 @@ module "public_lb" {
     }
   }
 
-  lbrules = {
-    lbrules1 = {
+  lb_rules = {
+    lb_rule1 = {
       backend_pool_key = "backend1"
       probe_name       = "testprobe"
       rule_name        = "testrule"

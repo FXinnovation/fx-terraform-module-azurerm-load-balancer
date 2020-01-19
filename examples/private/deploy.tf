@@ -1,4 +1,4 @@
-module "rg_demo" {
+module "resource_group_demo" {
   source   = "git::https://scm.dazzlingwrench.fxinnovation.com/fxinnovation-public/terraform-module-azurerm-resource-group.git?ref=0.2.0"
   location = "francecentral"
   name     = "tftest-sa"
@@ -6,7 +6,7 @@ module "rg_demo" {
 
 module "vnet_demo" {
   source              = "git::https://scm.dazzlingwrench.fxinnovation.com/fxinnovation-public/terraform-module-azurerm-virtualnetwork.git?ref=v0.2"
-  resource_group_name = module.rg_demo.name
+  resource_group_name = module.resource_group_demo.name
   vnet_name           = "fxcozca1dgenvn001"
   vnet_address_space  = ["10.0.0.0/16"]
   vnet_dns_servers    = ["8.8.8.8", "8.8.4.4"]
@@ -14,7 +14,7 @@ module "vnet_demo" {
 
 module "subnets" {
   source               = "git::https://scm.dazzlingwrench.fxinnovation.com/fxinnovation-public/terraform-module-azurerm-virtualnetwork-subnet.git?ref=0.2.1"
-  resource_group_name  = module.rg_demo.name
+  resource_group_name  = module.resource_group_demo.name
   virtual_network_name = module.vnet_demo.virtual_network_name
   subnets_config = {
     GatewaySubnet = {
@@ -32,7 +32,7 @@ module "subnets" {
 
 module "private_lb" {
   source                         = "../.."
-  resource_group_name            = module.rg_demo.name
+  resource_group_name            = module.resource_group_demo.name
   location                       = "francecentral"
   sku                            = "standard"
   loadbalancer_name              = "fxlb-private"
@@ -47,8 +47,8 @@ module "private_lb" {
     }
   }
 
-  lbrules = {
-    lbrules1 = {
+  lb_rules = {
+    lb_rule1 = {
       backend_pool_key = "backend1"
       probe_name       = "testprobe"
       rule_name        = "testrule"
