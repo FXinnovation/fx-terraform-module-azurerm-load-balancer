@@ -9,12 +9,27 @@ See `examples` folders for usage of this module.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| backend\_pools | Name of the backend pool which will be created | map | n/a | yes |
+| backend\_pools | Name of the backend pool which will be created | map  example: `backend_pools = {backend1 = {backend_pool_name = "backendtest"}}` | n/a | yes |
 | frontend\_ip\_configuration\_name | Name of the frontend ip configuration | string | n/a | yes |
-| lb\_rules | Protocols to be used for lb health probes and rules. | map | n/a | yes |
+| lb\_rules | Protocols to be used for lb health probes and rules. | map example: `lb_rules = {`
+    `lb_rule1 = {`
+      `backend_pool_key = "backend"`
+      `probe_name       = "probe"`
+      `rule_name        = "testrule"`
+      `frontend_port    = "80"`
+      `backend_port     = "80"`
+      `lb_rule_protocol = "Tcp"`
+      `port_probe       = "80"`
+      `protocol_probe   = "Http"`
+      `request_path     = "/"}}` | n/a | yes |
 | loadbalancer\_name | load balancer resources names. | string | n/a | yes |
 | location | location of the load\_balancer | string | n/a | yes |
-| nat\_rules | Protocols to be used for remote vm access. | map | n/a | yes |
+| nat\_rules | Protocols to be used for remote vm access. | map  example: `nat_rules = {`
+    `nat_rule1 = {`
+      `nat_rule_name = "testlb"`
+      `nat_protocol  = "Tcp"`
+      `backend_port  = "22"`
+      `frontend_port = "22"}}`| n/a | yes |
 | resource\_group\_name | Resource group where the vnet resides. | string | n/a | yes |
 | type | Define if the loadbalancer is private or public. | string | n/a | yes |
 | enable\_floating\_ip | Enables the Floating IP Capacity, required to configure a SQL AlwaysOn Availability Group. | bool | `"false"` | no |
