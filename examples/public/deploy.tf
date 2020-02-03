@@ -17,7 +17,7 @@ module "public_lb" {
 
   backend_pool_names     = ["fxbackendtest"]
   probe_names            = ["toto"]
-  probe_protocols        = ["HTTPS"]
+  probe_protocols        = ["HTTP"]
   probe_ports            = ["80"]
   request_paths          = ["/"]
   lb_rule_names          = ["fxtftest"]
