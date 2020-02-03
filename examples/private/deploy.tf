@@ -41,32 +41,16 @@ module "private_lb" {
   subnet_id                      = lookup(module.subnets.subnets_ids_map, "Subnet1")
   frontend_ip_configuration_name = "testlb"
 
-  backend_pools = {
-    backend1 = {
-      backend_pool_name = "fxbackendtest"
-    }
-  }
-
-  lb_rules = {
-    lb_rule1 = {
-      backend_pool_key = "backend1"
-      probe_name       = "testprobe"
-      rule_name        = "testrule"
-      frontend_port    = "80"
-      backend_port     = "80"
-      lb_rule_protocol = "Tcp"
-      port_probe       = "80"
-      protocol_probe   = "Http"
-      request_path     = "/"
-    }
-  }
-
-  nat_rules = {
-    nat_rule1 = {
-      nat_rule_name = "testlb"
-      nat_protocol  = "Tcp"
-      backend_port  = "22"
-      frontend_port = "22"
-    }
-  }
+  backend_pool_names     = ["fxbackendtest"]
+  probe_names            = ["boo"]
+  probe_protocols        = ["HTTPS"]
+  probe_ports            = ["80"]
+  lb_rule_names          = ["fxtftest"]
+  lb_rule_protocols      = ["TCP"]
+  lb_rule_frontend_ports = ["80"]
+  lb_rule_backend_ports  = ["80"]
+  nat_rule_names         = ["foo"]
+  nat_protocols          = ["Tcp"]
+  nat_front_end_ports    = ["22"]
+  nat_backend_ports      = ["22"]
 }
