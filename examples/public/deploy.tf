@@ -19,6 +19,7 @@ module "public_lb" {
   probe_names            = ["toto"]
   probe_protocols        = ["HTTPS"]
   probe_ports            = ["80"]
+  request_paths          = ["/"]
   lb_rule_names          = ["fxtftest"]
   lb_rule_protocols      = ["TCP"]
   lb_rule_frontend_ports = ["80"]

@@ -214,3 +214,9 @@ variable "probe_protocols" {
   type        = list(string)
   default     = [""]
 }
+
+variable "request_paths" {
+  description = "List of URI used for requesting health status from the backend endpoint required if protocol is set to Http. Otherwise, it is not allowed. "
+  type        = list(string)
+  default     = [""]
+}

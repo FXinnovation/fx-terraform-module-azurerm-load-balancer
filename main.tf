@@ -77,6 +77,7 @@ resource "azurerm_lb_probe" "this_probe_private" {
   loadbalancer_id     = azurerm_lb.this_private[0].id
   resource_group_name = var.resource_group_name
   interval_in_seconds = var.interval
+  request_path        = element(var.request_paths, count.index)
 }
 
 ###
@@ -174,6 +175,7 @@ resource "azurerm_lb_probe" "this_probe_public" {
   loadbalancer_id     = azurerm_lb.this_public[0].id
   resource_group_name = var.resource_group_name
   interval_in_seconds = var.interval
+  request_path        = element(var.request_paths, count.index)
 }
 
 ###
