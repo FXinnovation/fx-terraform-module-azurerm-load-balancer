@@ -141,7 +141,7 @@ resource "azurerm_lb_backend_address_pool" "this_public" {
 }
 
 resource "azurerm_lb_nat_pool" "this_public" {
-  count                          = local.create_public_load_balancer ? length(var.nat_pool_names) : 0
+  count                          = var.nat_pool_enabled ? length(var.nat_pool_names) : 0
   name                           = element(var.nat_pool_names, count.index)
   protocol                       = element(var.nat_protocols, count.index)
   backend_port                   = element(var.nat_backend_ports, count.index)
@@ -192,7 +192,7 @@ resource "azurerm_lb_rule" "this_lb_rule_public" {
   backend_port                   = element(var.lb_rule_backend_ports, count.index)
   frontend_ip_configuration_name = "${var.frontend_ip_configuration_name}-LBFG"
   backend_address_pool_id        = lookup(local.public_backend_pool_id, element(var.public_backend_pool_ids, count.index), null)
-  probe_id                       = element(azurerm_lb_probe.this_probe_private.*.id, count.index)
+  probe_id                       = element(azurerm_lb_probe.this_probe_public.*.id, count.index)
   idle_timeout_in_minutes        = var.timeout_in_minutes
   enable_floating_ip             = var.enable_floating_ip
   depends_on                     = [azurerm_lb_probe.this_probe_public]
