@@ -83,26 +83,31 @@ variable "nat_pool_enabled" {
 variable "nat_pool_names" {
   description = "List of nat pool names for nat pool."
   type        = list(string)
+  default     = [""]
 }
 
 variable "nat_pool_protocols" {
   description = "List of nat pool protocols."
   type        = list(string)
+  default     = [""]
 }
 
 variable "nat_pool_backend_ports" {
   description = "List of back end ports for the NAT pool."
   type        = list(string)
+  default     = [""]
 }
 
 variable "port_starts" {
   description = "List of frontend port start for NAT pool."
   type        = list(string)
+  default     = [""]
 }
 
 variable "port_ends" {
   description = "List of the frontend port end for NAT pool."
   type        = list(string)
+  default     = [""]
 }
 
 ###
@@ -112,21 +117,25 @@ variable "port_ends" {
 variable "nat_rule_names" {
   description = "List of name for the nat rule."
   type        = list(string)
+  default     = [""]
 }
 
 variable "nat_protocols" {
   description = "List of nat protocol which are associated to the rule."
   type        = list(string)
+  default     = [""]
 }
 
 variable "nat_frontend_ports" {
   description = "List of front end port which will be associated to the rule."
   type        = list(string)
+  default     = [""]
 }
 
 variable "nat_backend_ports" {
   description = "List of back end port which will be associated to the rule."
   type        = list(string)
+  default     = [""]
 }
 
 ###

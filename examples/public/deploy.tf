@@ -25,7 +25,7 @@ module "public_lb" {
   lb_rule_backend_ports  = ["80"]
   nat_rule_names         = ["boo"]
   nat_protocols          = ["Tcp"]
-  nat_front_end_ports    = ["22"]
+  nat_frontend_ports     = ["22"]
   nat_backend_ports      = ["22"]
 
 }
