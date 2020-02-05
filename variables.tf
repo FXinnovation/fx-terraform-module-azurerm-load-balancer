@@ -16,16 +16,31 @@ variable "location" {
 variable "type" {
   description = "Define if the loadbalancer is private or public."
   type        = string
+  default     = "public"
 }
+
+variable "tags" {
+  description = "Tags to add to the Load Balancer"
+  default     = {}
+}
+
+###
+# public ip
+###
 
 variable "public_ip_name" {
   description = "Name of the Public IP resource"
   default     = ""
 }
 
-variable "tags" {
-  description = "Tags to add to the Load Balancer"
-  default     = {}
+variable "public_ip_method" {
+  description = "the allocation method for this ip address possible values are `Static` or `Dynamic`. "
+  default     = "Static"
+}
+
+variable "public_ip_sku" {
+  description = "The sku of the public ip, accepted values are `Basic` and `Standard` defaults to `Basic`"
+  default     = "Basic"
 }
 
 ###
@@ -41,24 +56,29 @@ variable "sku" {
   default     = "Basic"
 }
 
-variable "method" {
-  description = "Defines the allocation method for this IP address."
-  default     = ""
-}
-
 variable "frontend_ip_configuration_name" {
   description = "Name of the frontend ip configuration"
   type        = string
 }
 
-variable "subnet_id" {
+variable "frontend_subnet_id" {
   description = "Frontend subnet id to use when in private mode"
   default     = ""
 }
 
-variable "private_ip_address" {
+variable "frontend_private_ip_address" {
   description = "Private ip address"
   default     = ""
+}
+
+variable "frontend_private_ip_address_allocation" {
+  description = "The allocation method for the irivate ip address used by this load balancer. Possible values as `Dynamic` and `Static`. "
+  default     = ""
+}
+
+variable "load_balancer_tags" {
+  description = "Tags to add to the Load Balancer"
+  default     = {}
 }
 
 ###
@@ -166,14 +186,8 @@ variable "lb_rule_backend_ports" {
   default     = [""]
 }
 
-variable "private_backend_pool_ids" {
-  description = "List of private backend pool ids to which the load balancer rule operates. Changing this will force to create new resource."
-  type        = list(string)
-  default     = [""]
-}
-
-variable "public_backend_pool_ids" {
-  description = "List of private backend pool ids to which the load balancer rule operates. Changing this will force to create new resource."
+variable "backend_pool_ids" {
+  description = "List of backend pool ids to which the load balancer rule operates. Changing this will force to create new resource."
   type        = list(string)
   default     = [""]
 }

@@ -1,49 +1,22 @@
 output "lb_ids" {
-  value = element(
-    concat(
-      azurerm_lb.this_private.*.id,
-      azurerm_lb.this_public.*.id,
-      list("")
-    ),
-    0
-  )
+  value = compact(concat(azurerm_lb.this.*.id, [""]))
 }
 
 output "lb_probe_ids" {
-  value = element(
-    concat(
-      azurerm_lb_probe.this_probe_private.*.id,
-      azurerm_lb_probe.this_probe_public.*.id,
-      list("")
-    ),
-    0
-  )
+  value = compact(concat(azurerm_lb_probe.this.*.id, [""]))
 }
 
 output "nat_rule_ids" {
-  value = element(
-    concat(
-      azurerm_lb_nat_rule.this_nat_rule_private.*.id,
-      azurerm_lb_nat_rule.this_nat_rule_public.*.id,
-      list("")
-    ),
-    0
-  )
+  value = compact(concat(azurerm_lb_nat_rule.this.*.id, [""]))
 }
 
 output "nat_pool_ids" {
-  value = element(
-    concat(
-      azurerm_lb_nat_pool.this_private.*.id,
-      azurerm_lb_nat_pool.this_public.*.id,
-      list("")
-    ),
-    0
-  )
+  value = compact(concat(azurerm_lb_nat_pool.this.*.id, [""]))
+
 }
 
 output "lb_private_ip" {
-  value = azurerm_lb.this_private.*.private_ip_address
+  value = azurerm_lb.this.*.private_ip_address
 }
 
 output "public_ip_id" {
@@ -52,12 +25,5 @@ output "public_ip_id" {
 }
 
 output "backend_pool_ids" {
-  value = element(
-    concat(
-      azurerm_lb_backend_address_pool.this_private.*.id,
-      azurerm_lb_backend_address_pool.this_public.*.id,
-      list("")
-    ),
-    0
-  )
+  value = compact(concat(azurerm_lb_backend_address_pool.this.*.id, [""]))
 }

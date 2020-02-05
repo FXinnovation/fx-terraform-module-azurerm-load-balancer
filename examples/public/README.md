@@ -1,4 +1,4 @@
-# public load balancer Example
+# Public Load Balancer example
 ## Usage
 ```
 terraform init
@@ -10,7 +10,10 @@ terraform destroy
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| azurerm | ~>1.40.0 |
+| random | n/a |
 
 ## Inputs
 
