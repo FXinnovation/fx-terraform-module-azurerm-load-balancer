@@ -14,10 +14,11 @@ module "public_lb" {
   resource_group_name            = azurerm_resource_group.example.name
   location                       = azurerm_resource_group.example.location
   loadbalancer_name              = "fxlb-public${random_string.this.result}"
-  method                         = "Dynamic"
   type                           = "public"
-  public_ip_name                 = "testip${random_string.this.result}"
   sku                            = "Basic"
+  public_ip_name                 = "testip${random_string.this.result}"
+  public_ip_method               = "Dynamic"
+  public_ip_sku                  = "Basic"
   frontend_ip_configuration_name = "teslb${random_string.this.result}"
 
   backend_pool_names     = ["fxbackendtest"]
