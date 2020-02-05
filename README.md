@@ -60,12 +60,12 @@ See `examples` folders for usage of this module.
 
 | Name | Description |
 |------|-------------|
-| backend\_pool\_ids | n/a |
-| lb\_ids | n/a |
-| lb\_private\_ip | n/a |
-| lb\_probe\_ids | n/a |
-| nat\_pool\_ids | n/a |
-| nat\_rule\_ids | n/a |
+| backend\_pool\_ids | The ids of the backend address pools. |
+| lb\_ids | The ids of the load balancer |
+| lb\_private\_ip | The first private IP address assigned to the load balancer in frontend\_ip\_configuration. |
+| lb\_probe\_ids | the ids of the load balncer probes. |
+| nat\_pool\_ids | The ids of the load balncer nat pools. |
+| nat\_rule\_ids | The ids of the load balncer nat rules. |
 | public\_ip\_id | The id for the public\_ip resource |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
