@@ -7,7 +7,7 @@ locals {
 ###
 
 resource "azurerm_public_ip" "this" {
-  count = var.type != "private" ? 1 : 0
+  count = var.type == "public" ? 1 : 0
 
   name                = var.public_ip_name
   location            = var.location
@@ -30,10 +30,10 @@ resource "azurerm_lb" "this" {
 
   frontend_ip_configuration {
     name                          = var.frontend_ip_configuration_name
+    public_ip_address_id          = var.type == "public" ? join("", azurerm_public_ip.this.*.id) : ""
     subnet_id                     = var.frontend_subnet_id
     private_ip_address            = var.frontend_private_ip_address
     private_ip_address_allocation = var.frontend_private_ip_address_allocation
-    public_ip_address_id          = var.type != "private" ? join("", azurerm_public_ip.this.*.id) : ""
   }
 
   tags = merge(

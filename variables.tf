@@ -61,6 +61,11 @@ variable "frontend_ip_configuration_name" {
   type        = string
 }
 
+variable "frontend_private_ip_address_allocation" {
+  description = "The allocation method for the irivate ip address used by this load balancer. Possible values as `Dynamic` and `Static`. "
+  default     = "static"
+}
+
 variable "frontend_subnet_id" {
   description = "Frontend subnet id to use when in private mode"
   default     = ""
@@ -69,11 +74,6 @@ variable "frontend_subnet_id" {
 variable "frontend_private_ip_address" {
   description = "Private ip address"
   default     = ""
-}
-
-variable "frontend_private_ip_address_allocation" {
-  description = "The allocation method for the irivate ip address used by this load balancer. Possible values as `Dynamic` and `Static`. "
-  default     = "static"
 }
 
 variable "load_balancer_tags" {
