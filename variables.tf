@@ -73,7 +73,7 @@ variable "frontend_private_ip_address" {
 
 variable "frontend_private_ip_address_allocation" {
   description = "The allocation method for the irivate ip address used by this load balancer. Possible values as `Dynamic` and `Static`. "
-  default     = ""
+  default     = "static"
 }
 
 variable "load_balancer_tags" {

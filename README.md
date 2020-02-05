@@ -23,7 +23,7 @@ See `examples` folders for usage of this module.
 | enabled | Enable or disable module | `bool` | `true` | no |
 | frontend\_ip\_configuration\_name | Name of the frontend ip configuration | `string` | n/a | yes |
 | frontend\_private\_ip\_address | Private ip address | `string` | `""` | no |
-| frontend\_private\_ip\_address\_allocation | The allocation method for the irivate ip address used by this load balancer. Possible values as `Dynamic` and `Static`. | `string` | `""` | no |
+| frontend\_private\_ip\_address\_allocation | The allocation method for the irivate ip address used by this load balancer. Possible values as `Dynamic` and `Static`. | `string` | `"static"` | no |
 | frontend\_subnet\_id | Frontend subnet id to use when in private mode | `string` | `""` | no |
 | interval | The interval, in seconds between probes to the backend endpoint for health status. | `number` | `5` | no |
 | lb\_rule\_backend\_ports | List of port used for internal connections on the endpoint. Possible values range between 1 and 65535, inclusive. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
