@@ -10,16 +10,18 @@ resource "azurerm_resource_group" "example" {
 }
 
 module "public_lb" {
-  source                         = "../.."
-  resource_group_name            = azurerm_resource_group.example.name
-  location                       = azurerm_resource_group.example.location
-  loadbalancer_name              = "fxlb-public${random_string.this.result}"
-  type                           = "public"
-  sku                            = "Basic"
-  public_ip_name                 = "testip${random_string.this.result}"
-  public_ip_method               = "Dynamic"
-  public_ip_sku                  = "Basic"
-  frontend_ip_configuration_name = "teslb${random_string.this.result}"
+  source              = "../.."
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+  loadbalancer_name   = "fxlb-public${random_string.this.result}"
+  type                = "public"
+  sku                 = "Basic"
+  public_ip_names     = ["testip${random_string.this.result}"]
+  public_ip_methods   = ["Dynamic"]
+  public_ip_skus      = ["Basic"]
+  frontend_ip_configurations = [
+    { name = "fxtest${random_string.this.result}", subnet_id = "", private_ip_address = "" }
+  ]
 
   backend_pool_names     = ["fxbackendtest"]
   probe_names            = ["toto"]

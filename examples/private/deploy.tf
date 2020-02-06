@@ -26,15 +26,14 @@ resource "azurerm_subnet" "example" {
 module "private_lb" {
   source = "../.."
 
-  resource_group_name                    = azurerm_resource_group.example.name
-  location                               = azurerm_resource_group.example.location
-  sku                                    = "standard"
-  loadbalancer_name                      = "fxlb-private${random_string.this.result}"
-  type                                   = "private"
-  frontend_private_ip_address_allocation = "static"
-  frontend_private_ip_address            = "10.0.1.6"
-  frontend_subnet_id                     = azurerm_subnet.example.id
-  frontend_ip_configuration_name         = "testlb${random_string.this.result}"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+  sku                 = "standard"
+  loadbalancer_name   = "fxlb-private${random_string.this.result}"
+  type                = "private"
+  frontend_ip_configurations = [
+    { name = "fxtest${random_string.this.result}", subnet_id = "${azurerm_subnet.example.id}", private_ip_address = "10.0.1.6" }
+  ]
 
   backend_pool_names     = ["fxbackendtest"]
   probe_names            = ["boo"]

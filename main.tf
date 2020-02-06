@@ -1,5 +1,6 @@
 locals {
-  backend_pool_ids = zipmap(var.backend_pool_names, compact(concat(azurerm_lb_backend_address_pool.this.*.id, [""])))
+  backend_pool_ids      = zipmap(var.backend_pool_names, compact(concat(azurerm_lb_backend_address_pool.this.*.id, [""])))
+  public_ip_address_ids = zipmap(var.public_ip_names, compact(concat(azurerm_public_ip.this.*.id, [""])))
 }
 
 ###
@@ -7,13 +8,13 @@ locals {
 ###
 
 resource "azurerm_public_ip" "this" {
-  count = var.type == "public" ? 1 : 0
+  count = var.type == "public" ? length(var.frontend_ip_configurations) : 0
 
-  name                = var.public_ip_name
+  name                = element(var.public_ip_names, count.index)
   location            = var.location
   resource_group_name = var.resource_group_name
-  allocation_method   = var.public_ip_method
-  sku                 = var.public_ip_sku
+  allocation_method   = element(var.public_ip_methods, count.index)
+  sku                 = element(var.public_ip_skus, count.index)
 }
 
 ###
@@ -28,14 +29,16 @@ resource "azurerm_lb" "this" {
   resource_group_name = var.resource_group_name
   sku                 = var.sku
 
-  frontend_ip_configuration {
-    name                          = var.frontend_ip_configuration_name
-    public_ip_address_id          = var.type == "public" ? join("", azurerm_public_ip.this.*.id) : ""
-    subnet_id                     = var.frontend_subnet_id
-    private_ip_address            = var.frontend_private_ip_address
-    private_ip_address_allocation = var.frontend_private_ip_address_allocation
+  dynamic "frontend_ip_configuration" {
+    for_each = var.frontend_ip_configurations
+    content {
+      name                          = frontend_ip_configuration.value.name
+      public_ip_address_id          = var.type == "public" ? lookup(local.public_ip_address_ids, each.key, null) : ""
+      subnet_id                     = frontend_ip_configuration.value.subnet_id
+      private_ip_address            = frontend_ip_configuration.value.private_ip_address
+      private_ip_address_allocation = frontend_ip_configuration.value.subnet_id == "" ? "Dynamic" : "Static"
+    }
   }
-
   tags = merge(
     var.tags,
     var.load_balancer_tags,
@@ -67,7 +70,7 @@ resource "azurerm_lb_nat_pool" "this" {
   resource_group_name            = var.resource_group_name
   frontend_port_start            = element(var.port_starts, count.index)
   frontend_port_end              = element(var.port_ends, count.index)
-  frontend_ip_configuration_name = var.frontend_ip_configuration_name
+  frontend_ip_configuration_name = lookup(element(var.frontend_ip_configurations, count.index), "name", null)
 }
 
 ###
@@ -83,7 +86,7 @@ resource "azurerm_lb_nat_rule" "this" {
   resource_group_name            = var.resource_group_name
   frontend_port                  = element(var.nat_frontend_ports, count.index)
   backend_port                   = element(var.nat_backend_ports, count.index)
-  frontend_ip_configuration_name = var.frontend_ip_configuration_name
+  frontend_ip_configuration_name = lookup(element(var.frontend_ip_configurations, count.index), "name", null)
 }
 
 resource "azurerm_lb_probe" "this" {
@@ -111,7 +114,7 @@ resource "azurerm_lb_rule" "this" {
   protocol                       = element(var.lb_rule_protocols, count.index)
   frontend_port                  = element(var.lb_rule_frontend_ports, count.index)
   backend_port                   = element(var.lb_rule_backend_ports, count.index)
-  frontend_ip_configuration_name = var.frontend_ip_configuration_name
+  frontend_ip_configuration_name = lookup(element(var.frontend_ip_configurations, count.index), "name", null)
   backend_address_pool_id        = lookup(local.backend_pool_ids, element(var.backend_pool_ids, count.index), null)
   probe_id                       = element(azurerm_lb_probe.this.*.id, count.index)
   idle_timeout_in_minutes        = var.timeout_in_minutes

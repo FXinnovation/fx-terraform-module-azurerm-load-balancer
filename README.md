@@ -3,9 +3,6 @@
 ## Usage
 See `examples` folders for usage of this module.
 
-## Limitation
-- Only one freont configuration is possible for now.
-
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Providers
 
@@ -21,10 +18,7 @@ See `examples` folders for usage of this module.
 | backend\_pool\_names | Name of the backend pool which will be created | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | enable\_floating\_ip | Enables the Floating IP Capacity, required to configure a SQL AlwaysOn Availability Group. | `bool` | `false` | no |
 | enabled | Enable or disable module | `bool` | `true` | no |
-| frontend\_ip\_configuration\_name | Name of the frontend ip configuration | `string` | n/a | yes |
-| frontend\_private\_ip\_address | Private ip address | `string` | `""` | no |
-| frontend\_private\_ip\_address\_allocation | The allocation method for the irivate ip address used by this load balancer. Possible values as `Dynamic` and `Static`. | `string` | `"Dynamic"` | no |
-| frontend\_subnet\_id | Frontend subnet id to use when in private mode | `string` | `""` | no |
+| frontend\_ip\_configurations | Name of the frontend ip configuration | `list(object({ name = string, subnet_id = string, private_ip_address = string }))` | n/a | yes |
 | interval | The interval, in seconds between probes to the backend endpoint for health status. | `number` | `5` | no |
 | lb\_rule\_backend\_ports | List of port used for internal connections on the endpoint. Possible values range between 1 and 65535, inclusive. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | lb\_rule\_frontend\_ports | List of port for the external endpoint. Port numbers for each Rule must be unique within the load balancer. Possible values range between 1 and 65534, inclusive | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
@@ -46,9 +40,9 @@ See `examples` folders for usage of this module.
 | probe\_names | list of loadbalncer probe name that will be created. changing this will force to create new resource. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | probe\_ports | List of ports on which the probe will queries the backend endpoint. possible values range from 1 to 65535, inclusive. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | probe\_protocols | List of protocol of the end point. possible values are `Http`, `Https` or `Tcp`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
-| public\_ip\_method | the allocation method for this ip address possible values are `Static` or `Dynamic`. | `string` | `"Static"` | no |
-| public\_ip\_name | Name of the Public IP resource | `string` | `""` | no |
-| public\_ip\_sku | The sku of the public ip, accepted values are `Basic` and `Standard` defaults to `Basic` | `string` | `"Basic"` | no |
+| public\_ip\_methods | the allocation method for this ip address possible values are `Static` or `Dynamic`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| public\_ip\_names | Name of the Public IP resource | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| public\_ip\_skus | The sku of the public ip, accepted values are `Basic` and `Standard` defaults to `Basic` | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | request\_paths | List of URI used for requesting health status from the backend endpoint required if protocol is set to Http. Otherwise, it is not allowed. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | resource\_group\_name | Resource group where the vnet resides. | `string` | n/a | yes |
 | sku | The SKU of the Load Balancer. | `string` | `"Basic"` | no |

@@ -28,19 +28,24 @@ variable "tags" {
 # public ip
 ###
 
-variable "public_ip_name" {
+variable "public_ip_names" {
   description = "Name of the Public IP resource"
-  default     = ""
+  type        = list(string)
+  default     = [""]
 }
 
-variable "public_ip_method" {
+variable "public_ip_methods" {
   description = "the allocation method for this ip address possible values are `Static` or `Dynamic`. "
-  default     = "Static"
+  type        = list(string)
+  default     = [""]
+  #default     = "Static"
 }
 
-variable "public_ip_sku" {
+variable "public_ip_skus" {
   description = "The sku of the public ip, accepted values are `Basic` and `Standard` defaults to `Basic`"
-  default     = "Basic"
+  type        = list(string)
+  default     = [""]
+  #default     = "Basic"
 }
 
 ###
@@ -56,24 +61,9 @@ variable "sku" {
   default     = "Basic"
 }
 
-variable "frontend_ip_configuration_name" {
+variable "frontend_ip_configurations" {
   description = "Name of the frontend ip configuration"
-  type        = string
-}
-
-variable "frontend_private_ip_address_allocation" {
-  description = "The allocation method for the irivate ip address used by this load balancer. Possible values as `Dynamic` and `Static`. "
-  default     = "Dynamic"
-}
-
-variable "frontend_subnet_id" {
-  description = "Frontend subnet id to use when in private mode"
-  default     = ""
-}
-
-variable "frontend_private_ip_address" {
-  description = "Private ip address"
-  default     = ""
+  type        = list(object({ name = string, subnet_id = string, private_ip_address = string }))
 }
 
 variable "load_balancer_tags" {
