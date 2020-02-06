@@ -21,7 +21,7 @@ See `examples` folders for usage of this module.
 | backend\_pool\_names | Name of the backend pool which will be created | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | enable\_floating\_ip | Enables the Floating IP Capacity, required to configure a SQL AlwaysOn Availability Group. | `bool` | `false` | no |
 | enabled | Enable or disable module | `bool` | `true` | no |
-| frontend\_ip\_configuration\_name | Name of the frontend ip configuration | `string` | n/a | yes |
+| frontend\_ip\_configuration\_name | Name of the frontend ip configuration. | `string` | n/a | yes |
 | frontend\_private\_ip\_address | Private ip address | `string` | `""` | no |
 | frontend\_private\_ip\_address\_allocation | The allocation method for the irivate ip address used by this load balancer. Possible values as `Dynamic` and `Static`. | `string` | `"Dynamic"` | no |
 | frontend\_subnet\_id | Frontend subnet id to use when in private mode | `string` | `""` | no |
