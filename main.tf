@@ -1,6 +1,6 @@
 locals {
   backend_pool_ids      = zipmap(var.backend_pool_names, compact(concat(azurerm_lb_backend_address_pool.this.*.id, [""])))
-  public_ip_address_ids = zipmap(var.public_ip_names, compact(concat(azurerm_public_ip.this.*.id, [""])))
+  public_ip_address_ids = var.type == "public" ? zipmap(var.public_ip_names, compact(concat(azurerm_public_ip.this.*.id, [""]))) : {}
 }
 
 ###
