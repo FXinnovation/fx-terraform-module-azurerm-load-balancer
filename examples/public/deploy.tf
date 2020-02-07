@@ -34,10 +34,10 @@ module "public_lb" {
   lb_rule_protocols                        = ["TCP"]
   lb_rule_frontend_ports                   = ["80"]
   lb_rule_backend_ports                    = ["80"]
-  lb_rule_frontend_ip_configuration_names  = ["fxterra${random_string.this.result}"]
+  lb_rule_frontend_ip_configuration_names  = ["toto${random_string.this.result}"]
   nat_rule_names                           = ["boo"]
   nat_protocols                            = ["Tcp"]
   nat_frontend_ports                       = ["22"]
   nat_backend_ports                        = ["22"]
-  nat_rule_frontend_ip_configuration_names = ["fxterra${random_string.this.result}"]
+  nat_rule_frontend_ip_configuration_names = ["toto${random_string.this.result}"]
 }
