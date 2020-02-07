@@ -1,9 +1,9 @@
 output "load_balncer_id" {
-  value = module.public_lb.load_balncer_id
+  value = module.public_lb.lb_ids
 }
 
 output "backend_pool_id" {
-  value = module.public_lb.backend_pool_id
+  value = module.public_lb.backend_pool_ids
 }
 
 output "nat_rule_ids" {

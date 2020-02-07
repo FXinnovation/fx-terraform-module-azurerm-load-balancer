@@ -28,9 +28,9 @@ terraform destroy
 
 | Name | Description |
 |------|-------------|
-| backend\_pool\_id | n/a |
+| backend\_pool\_ids | n/a |
 | lb\_rule\_ids | n/a |
-| load\_balncer\_id | n/a |
+| load\_balncer\_ids | n/a |
 | nat\_rule\_ids | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
