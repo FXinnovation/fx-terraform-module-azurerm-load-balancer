@@ -18,7 +18,7 @@ See `examples` folders for usage of this module.
 | backend\_pool\_names | Name of the backend pool which will be created | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | enable\_floating\_ip | Enables the Floating IP Capacity, required to configure a SQL AlwaysOn Availability Group. | `bool` | `false` | no |
 | enabled | Enable or disable module | `bool` | `true` | no |
-| frontend\_ip\_configurations | Name of the frontend ip configuration | `list(object({ name = string, subnet_id = string, private_ip_address = string }))` | n/a | yes |
+| frontend\_ip\_configurations | Name of the frontend ip configuration | `list(object({ name = string, subnet_id = string, private_ip_address = string, public_ip_address_id = string }))` | n/a | yes |
 | interval | The interval, in seconds between probes to the backend endpoint for health status. | `number` | `5` | no |
 | lb\_rule\_backend\_ports | List of port used for internal connections on the endpoint. Possible values range between 1 and 65535, inclusive. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | lb\_rule\_frontend\_ports | List of port for the external endpoint. Port numbers for each Rule must be unique within the load balancer. Possible values range between 1 and 65534, inclusive | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |

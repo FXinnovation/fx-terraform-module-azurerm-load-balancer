@@ -63,7 +63,7 @@ variable "sku" {
 
 variable "frontend_ip_configurations" {
   description = "Name of the frontend ip configuration"
-  type        = list(object({ name = string, subnet_id = string, private_ip_address = string }))
+  type        = list(object({ name = string, subnet_id = string, private_ip_address = string, public_ip_address_id = string }))
 }
 
 variable "load_balancer_tags" {

@@ -33,9 +33,9 @@ resource "azurerm_lb" "this" {
     for_each = var.frontend_ip_configurations
     content {
       name                          = frontend_ip_configuration.value.name
-      public_ip_address_id          = var.type == "public" ? lookup(local.public_ip_address_ids, each.key, null) : ""
-      subnet_id                     = frontend_ip_configuration.value.subnet_id
-      private_ip_address            = frontend_ip_configuration.value.private_ip_address
+      public_ip_address_id          = var.type == "public" ? lookup(local.public_ip_address_ids, frontend_ip_configuration.value.public_ip_address_id, null) : ""
+      subnet_id                     = var.type == "private" ? frontend_ip_configuration.value.subnet_id : ""
+      private_ip_address            = var.type == "private" ? frontend_ip_configuration.value.private_ip_address : ""
       private_ip_address_allocation = frontend_ip_configuration.value.subnet_id == "" ? "Dynamic" : "Static"
     }
   }
