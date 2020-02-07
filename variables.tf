@@ -120,6 +120,13 @@ variable "port_ends" {
   default     = [""]
 }
 
+variable "nat_pool_frontend_ip_configuration_names" {
+  description = "List of frotend ip configuration name to which the nat pool will be associated. Changing this will force to create new resource."
+  type        = list(string)
+  default     = [""]
+}
+
+
 ###
 # NAT rule
 ###
@@ -147,6 +154,13 @@ variable "nat_backend_ports" {
   type        = list(string)
   default     = [""]
 }
+
+variable "nat_rule_frontend_ip_configuration_names" {
+  description = "List of frontend ip configuration name to which nat rule will be associated. Changing tis will force to create new resource."
+  type        = list(string)
+  default     = [""]
+}
+
 
 ###
 # load balancer rules
@@ -178,6 +192,19 @@ variable "lb_rule_backend_ports" {
 
 variable "backend_pool_ids" {
   description = "List of backend pool ids to which the load balancer rule operates. Changing this will force to create new resource."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "probe_ids" {
+  description = "List of probe ids to which the load balancer rule is attached. Changing this will force to create new resource."
+  type        = list(string)
+  default     = [""]
+}
+
+
+variable "lb_rule_frontend_ip_configuration_names" {
+  description = "List of frontend ip configuration name to whcih the load balancer rule will be associated. Changing this will force to create new rule."
   type        = list(string)
   default     = [""]
 }

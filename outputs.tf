@@ -18,6 +18,12 @@ output "nat_pool_ids" {
   value       = compact(concat(azurerm_lb_nat_pool.this.*.id, [""]))
 }
 
+output "lb_rule_ids" {
+  description = "The ids of the load balancer Rule. "
+  value       = compact(concat(azurerm_lb_rule.this.*.id, [""]))
+}
+
+
 output "lb_private_ip" {
   description = "The first private IP address assigned to the load balancer in frontend_ip_configuration."
   value       = azurerm_lb.this.*.private_ip_address
@@ -31,4 +37,9 @@ output "public_ip_id" {
 output "backend_pool_ids" {
   description = "The ids of the backend address pools."
   value       = compact(concat(azurerm_lb_backend_address_pool.this.*.id, [""]))
+}
+
+output "frontend_ip_configuartion_address" {
+  description = "The list of private ip address assigned to the load balancer in `frontend_ip_configuration blocks`, if any."
+  value       = compact(concat(azurerm_lb.this.*.private_ip_address, [""]))
 }

@@ -26,6 +26,11 @@ terraform destroy
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| backend\_pool\_id | n/a |
+| lb\_rule\_ids | n/a |
+| load\_balncer\_id | n/a |
+| nat\_rule\_ids | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
