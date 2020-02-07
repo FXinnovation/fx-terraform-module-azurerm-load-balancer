@@ -39,7 +39,7 @@ module "private_lb" {
   loadbalancer_name   = "fxlb-private${random_string.this.result}"
   type                = "private"
   frontend_ip_configurations = [
-    { name = "fxtest${random_string.this.result}", subnet_id = "${azurerm_subnet.example.id}", private_ip_address = "10.0.1.6", public_ip_address_id = "" },
+    { name = "fxtest${random_string.this.result}", subnet_id = "${azurerm_subnet.example.id}", private_ip_address = "10.0.1.25", public_ip_address_id = "" },
     { name = "fxterra${random_string.this.result}", subnet_id = "${azurerm_subnet.test.id}", private_ip_address = "10.0.2.8", public_ip_address_id = "" },
   ]
 
