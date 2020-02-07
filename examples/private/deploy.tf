@@ -23,6 +23,13 @@ resource "azurerm_subnet" "example" {
   address_prefix       = "10.0.1.0/24"
 }
 
+resource "azurerm_subnet" "test" {
+  name                 = "tftest${random_string.this.result}"
+  resource_group_name  = azurerm_resource_group.example.name
+  virtual_network_name = azurerm_virtual_network.example.name
+  address_prefix       = "10.0.2.0/24"
+}
+
 module "private_lb" {
   source = "../.."
 
@@ -32,7 +39,8 @@ module "private_lb" {
   loadbalancer_name   = "fxlb-private${random_string.this.result}"
   type                = "private"
   frontend_ip_configurations = [
-    { name = "fxtest${random_string.this.result}", subnet_id = "${azurerm_subnet.example.id}", private_ip_address = "10.0.1.6", public_ip_address_id = "" }
+    { name = "fxtest${random_string.this.result}", subnet_id = "${azurerm_subnet.example.id}", private_ip_address = "10.0.1.6", public_ip_address_id = "" },
+    { name = "fxterra${random_string.this.result}", subnet_id = "${azurerm_subnet.test.id}", private_ip_address = "10.0.2.8", public_ip_address_id = "" },
   ]
 
   backend_pool_names     = ["fxbackendtest"]

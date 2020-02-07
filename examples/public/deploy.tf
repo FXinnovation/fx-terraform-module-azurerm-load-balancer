@@ -16,11 +16,12 @@ module "public_lb" {
   loadbalancer_name   = "fxlb-public${random_string.this.result}"
   type                = "public"
   sku                 = "Basic"
-  public_ip_names     = ["testip${random_string.this.result}"]
+  public_ip_names     = ["testip${random_string.this.result}", "fofo${random_string.this.result}"]
   public_ip_methods   = ["Dynamic"]
   public_ip_skus      = ["Basic"]
   frontend_ip_configurations = [
-    { name = "fxtest${random_string.this.result}", public_ip_address_id = "testip${random_string.this.result}", subnet_id = "", private_ip_address = "" }
+    { name = "fxtest${random_string.this.result}", public_ip_address_id = "testip${random_string.this.result}", subnet_id = "", private_ip_address = "" },
+    { name = "toto${random_string.this.result}", public_ip_address_id = "fofo${random_string.this.result}", subnet_id = "", private_ip_address = "" },
   ]
 
   backend_pool_names     = ["fxbackendtest"]
