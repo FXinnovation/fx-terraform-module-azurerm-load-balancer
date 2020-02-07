@@ -24,7 +24,7 @@ resource "azurerm_subnet" "example" {
 }
 
 resource "azurerm_subnet" "test" {
-  name                 = "tftest${random_string.this.result}"
+  name                 = "fxterra${random_string.this.result}"
   resource_group_name  = azurerm_resource_group.example.name
   virtual_network_name = azurerm_virtual_network.example.name
   address_prefix       = "10.0.2.0/24"
