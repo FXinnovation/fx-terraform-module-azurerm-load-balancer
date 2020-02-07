@@ -32,7 +32,7 @@ module "private_lb" {
   loadbalancer_name   = "fxlb-private${random_string.this.result}"
   type                = "private"
   frontend_ip_configurations = [
-    { name = "fxtest${random_string.this.result}", subnet_id = "${azurerm_subnet.example.id}", private_ip_address = "10.0.1.6" }
+    { name = "fxtest${random_string.this.result}", subnet_id = "${azurerm_subnet.example.id}", private_ip_address = "10.0.1.6", public_ip_address_id = "" }
   ]
 
   backend_pool_names     = ["fxbackendtest"]
