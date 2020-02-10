@@ -43,6 +43,7 @@ module "private_lb" {
     { name = "fxterra${random_string.this.result}", subnet_id = "${azurerm_subnet.test.id}", private_ip_address = "10.0.2.8", public_ip_address_id = "" },
   ]
 
+  backend_pool_enabled                     = true
   backend_pool_names                       = ["fxbackendtest"]
   probe_names                              = ["boo"]
   probe_protocols                          = ["HTTPS"]

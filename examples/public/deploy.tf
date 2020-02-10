@@ -24,6 +24,7 @@ module "public_lb" {
     { name = "toto${random_string.this.result}", public_ip_address_id = "fofo${random_string.this.result}", subnet_id = "", private_ip_address = "" },
   ]
 
+  backend_pool_enabled                     = true
   backend_pool_names                       = ["fxbackendtest"]
   probe_names                              = ["toto"]
   probe_protocols                          = ["HTTP"]

@@ -50,7 +50,7 @@ resource "azurerm_lb" "this" {
 }
 
 resource "azurerm_lb_backend_address_pool" "this" {
-  count = var.enabled ? length(var.backend_pool_names) : 0
+  count = var.enabled && var.backend_pool_enabled ? length(var.backend_pool_names) : 0
 
   name                = var.backend_pool_names[count.index]
   resource_group_name = var.resource_group_name
@@ -98,7 +98,7 @@ resource "azurerm_lb_probe" "this" {
   protocol            = element(var.probe_protocols, count.index)
   loadbalancer_id     = azurerm_lb.this[0].id
   resource_group_name = var.resource_group_name
-  interval_in_seconds = var.interval
+  interval_in_seconds = var.lb_probe_interval_in_seconds
   request_path        = element(var.request_paths, count.index)
 }
 
