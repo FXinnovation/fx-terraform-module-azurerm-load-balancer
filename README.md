@@ -36,6 +36,7 @@ See `examples` folders for usage of this module.
 | nat\_pool\_names | List of nat pool names for nat pool. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | nat\_pool\_protocols | List of nat pool protocols. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | nat\_protocols | List of nat protocol which are associated to the rule. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| nat\_rule\_enabled | Boolean flag which decribes whether or not to enable the nat rule. | `bool` | `false` | no |
 | nat\_rule\_frontend\_ip\_configuration\_names | List of frontend ip configuration name to which nat rule will be associated. Changing tis will force to create new resource. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | nat\_rule\_names | List of name for the nat rule. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | port\_ends | List of the frontend port end for NAT pool. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |

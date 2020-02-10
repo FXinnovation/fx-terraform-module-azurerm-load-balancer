@@ -55,6 +55,7 @@ module "private_lb" {
   lb_rule_backend_ports                    = ["80"]
   probe_ids                                = ["boo"]
   lb_rule_frontend_ip_configuration_names  = ["fxterra${random_string.this.result}"]
+  nat_rule_enabled                         = true
   nat_rule_names                           = ["foo"]
   nat_protocols                            = ["Tcp"]
   nat_frontend_ports                       = ["22"]

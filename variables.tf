@@ -38,14 +38,12 @@ variable "public_ip_methods" {
   description = "the allocation method for this ip address possible values are `Static` or `Dynamic`. "
   type        = list(string)
   default     = [""]
-  #default     = "Static"
 }
 
 variable "public_ip_skus" {
   description = "The sku of the public ip, accepted values are `Basic` and `Standard` defaults to `Basic`"
   type        = list(string)
   default     = [""]
-  #default     = "Basic"
 }
 
 ###
@@ -130,6 +128,11 @@ variable "nat_pool_frontend_ip_configuration_names" {
 ###
 # NAT rule
 ###
+
+variable "nat_rule_enabled" {
+  description = "Boolean flag which decribes whether or not to enable the nat rule."
+  default     = false
+}
 
 variable "nat_rule_names" {
   description = "List of name for the nat rule."

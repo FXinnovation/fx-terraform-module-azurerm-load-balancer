@@ -79,7 +79,7 @@ resource "azurerm_lb_nat_pool" "this" {
 ###
 
 resource "azurerm_lb_nat_rule" "this" {
-  count = var.enabled ? length(var.nat_rule_names) : 0
+  count = var.enabled && var.nat_rule_enabled ? length(var.nat_rule_names) : 0
 
   name                           = element(var.nat_rule_names, count.index)
   protocol                       = element(var.nat_protocols, count.index)
