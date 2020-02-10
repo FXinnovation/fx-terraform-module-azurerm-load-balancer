@@ -218,7 +218,7 @@ variable "lb_rule_frontend_ip_configuration_names" {
   default     = [""]
 }
 
-variable "lb_probes_interval_in_seconds" {
+variable "lb_probe_interval_in_seconds" {
   description = "The interval, in seconds between probes to the backend endpoint for health status."
   default     = 5
 }

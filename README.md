@@ -20,7 +20,7 @@ See `examples` folders for usage of this module.
 | enable\_floating\_ip | Enables the Floating IP Capacity, required to configure a SQL AlwaysOn Availability Group. | `bool` | `false` | no |
 | enabled | Enable or disable module | `bool` | `true` | no |
 | frontend\_ip\_configurations | One or more frontend IP configurations block. chaning this block will force to create new frontend IP configuration block to the Load Balancer. | `list(object({ name = string, subnet_id = string, private_ip_address = string, public_ip_address_id = string }))` | n/a | yes |
-| lb\_probes\_interval\_in\_seconds | The interval, in seconds between probes to the backend endpoint for health status. | `number` | `5` | no |
+| lb\_probe\_interval\_in\_seconds | The interval, in seconds between probes to the backend endpoint for health status. | `number` | `5` | no |
 | lb\_rule\_backend\_ports | List of port used for internal connections on the endpoint. Possible values range between 1 and 65535, inclusive. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | lb\_rule\_frontend\_ip\_configuration\_names | List of frontend ip configuration name to whcih the Load Balancer rule will be associated. Changing this will force to create new rule. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | lb\_rule\_frontend\_ports | List of port for the external endpoint. Port numbers for each Rule must be unique within the Load Balancer. Possible values range between 1 and 65534, inclusive | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
