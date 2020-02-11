@@ -82,7 +82,7 @@ variable "backend_pool_enabled" {
 variable "backend_pool_names" {
   description = "List of names of the backend pools which will be created"
   type        = list(string)
-  default     = [""]
+  default     = []
 }
 
 ###
@@ -136,7 +136,7 @@ variable "nat_pool_frontend_ip_configuration_names" {
 ###
 
 variable "nat_rule_enabled" {
-  description = "Boolean flag which decribes whether or not to enable the nat rules."
+  description = "Boolean flag which describes whether or not to enable the nat rules."
   default     = false
 }
 

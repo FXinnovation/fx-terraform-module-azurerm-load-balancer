@@ -31,7 +31,7 @@ terraform destroy
 | backend\_pool\_id | n/a |
 | backend\_pool\_ids\_map | n/a |
 | lb\_rule\_ids | n/a |
-| load\_balncer\_id | n/a |
+| load\_balancer\_id | n/a |
 | nat\_rule\_ids | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

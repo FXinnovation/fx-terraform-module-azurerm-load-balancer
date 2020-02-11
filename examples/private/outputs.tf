@@ -1,4 +1,4 @@
-output "load_balncer_ids" {
+output "load_balancer_ids" {
   value = module.private_lb.lb_ids
 }
 
