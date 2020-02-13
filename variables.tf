@@ -82,7 +82,7 @@ variable "backend_pool_enabled" {
 variable "backend_pool_names" {
   description = "List of names of the backend pools which will be created"
   type        = list(string)
-  default     = []
+  default     = [""]
 }
 
 ###
@@ -202,7 +202,7 @@ variable "lb_rule_backend_ports" {
 variable "backend_pool_ids" {
   description = "List of backend pool ids to which the Load Balancer rule operates. Changing this will force to create new resource."
   type        = list(string)
-  default     = []
+  default     = [""]
 }
 
 variable "probe_ids" {
@@ -219,14 +219,23 @@ variable "lb_rule_frontend_ip_configuration_names" {
 }
 
 variable "lb_probe_interval_in_seconds" {
-  description = "The interval, in seconds between probes to the backend endpoint for health status."
-  default     = 5
+  description = "List of intervals, in seconds between probes to the backend endpoint for health status."
+  type        = list(number)
+  default     = [5]
 }
 
-variable "timeout_in_minutes" {
-  description = "Specifies the timeout for the Tcp idle connection."
-  default     = 5
+variable "idle_timeout_in_minutes" {
+  description = "List of timeouts for the Tcp idle connection."
+  type        = list(number)
+  default     = [5]
 }
+
+variable "load_distribution" {
+  description = "List which specifies the load balancing distribution type to be used by the Load Balancer. Possible values are: `Default` – The load balancer is configured to use a 5 tuple hash to map traffic to available servers. `SourceIP` – The load balancer is configured to use a 2 tuple hash to map traffic to available servers. `SourceIPProtocol` – The load balancer is configured to use a 3 tuple hash to map traffic to available servers. Also known as Session Persistence, where the options are called `None`, `Client IP` and `Client IP and Protocol` respectively. "
+  type        = list(string)
+  default     = ["Default"]
+}
+
 
 variable "enable_floating_ip" {
   description = "Enables the Floating IP Capacity, required to configure a SQL AlwaysOn Availability Group."

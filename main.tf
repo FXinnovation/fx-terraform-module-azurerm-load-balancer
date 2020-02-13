@@ -1,5 +1,5 @@
 locals {
-  backend_pool_ids      = zipmap(var.backend_pool_names, compact(concat(azurerm_lb_backend_address_pool.this.*.id, [""])))
+  backend_pool_ids      = var.backend_pool_enabled ? zipmap(var.backend_pool_names, compact(concat(azurerm_lb_backend_address_pool.this.*.id, [""]))) : {}
   public_ip_address_ids = var.type == "public" ? zipmap(var.public_ip_names, compact(concat(azurerm_public_ip.this.*.id, [""]))) : {}
   probe_ids             = zipmap(var.probe_names, compact(concat(azurerm_lb_probe.this.*.id, [""])))
 }
@@ -98,7 +98,7 @@ resource "azurerm_lb_probe" "this" {
   protocol            = element(var.probe_protocols, count.index)
   loadbalancer_id     = azurerm_lb.this[0].id
   resource_group_name = var.resource_group_name
-  interval_in_seconds = var.lb_probe_interval_in_seconds
+  interval_in_seconds = element(var.lb_probe_interval_in_seconds, count.index)
   request_path        = element(var.request_paths, count.index)
 }
 
@@ -118,7 +118,8 @@ resource "azurerm_lb_rule" "this" {
   frontend_ip_configuration_name = element(var.lb_rule_frontend_ip_configuration_names, count.index)
   backend_address_pool_id        = lookup(local.backend_pool_ids, element(var.backend_pool_ids, count.index), null)
   probe_id                       = lookup(local.probe_ids, element(var.probe_ids, count.index), null)
-  idle_timeout_in_minutes        = var.timeout_in_minutes
+  idle_timeout_in_minutes        = element(var.idle_timeout_in_minutes, count.index)
+  load_distribution              = element(var.load_distribution, count.index)
   enable_floating_ip             = var.enable_floating_ip
   depends_on                     = [azurerm_lb_probe.this]
 }
