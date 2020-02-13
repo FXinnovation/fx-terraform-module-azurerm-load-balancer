@@ -82,7 +82,7 @@ variable "backend_pool_enabled" {
 variable "backend_pool_names" {
   description = "List of names of the backend pools which will be created"
   type        = list(string)
-  default     = [""]
+  default     = []
 }
 
 ###
