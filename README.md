@@ -15,7 +15,7 @@ See `examples` folders for usage of this module.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
 | backend\_pool\_enabled | Boolean flag which describes whethere the Load balncer Backend pool is enabled or not. | `bool` | `false` | no |
-| backend\_pool\_ids | List of backend pool ids to which the Load Balancer rule operates. Changing this will force to create new resource. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| backend\_pool\_ids | List of backend pool ids to which the Load Balancer rule operates. Changing this will force to create new resource. | `list(string)` | `[]` | no |
 | backend\_pool\_names | List of names of the backend pools which will be created | `list(string)` | `[]` | no |
 | enable\_floating\_ip | Enables the Floating IP Capacity, required to configure a SQL AlwaysOn Availability Group. | `bool` | `false` | no |
 | enabled | Enable or disable module | `bool` | `true` | no |

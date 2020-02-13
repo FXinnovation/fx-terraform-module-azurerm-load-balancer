@@ -202,7 +202,7 @@ variable "lb_rule_backend_ports" {
 variable "backend_pool_ids" {
   description = "List of backend pool ids to which the Load Balancer rule operates. Changing this will force to create new resource."
   type        = list(string)
-  default     = [""]
+  default     = []
 }
 
 variable "probe_ids" {
