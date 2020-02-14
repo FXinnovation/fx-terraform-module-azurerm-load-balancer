@@ -119,7 +119,7 @@ resource "azurerm_lb_rule" "this" {
   backend_address_pool_id        = lookup(local.backend_pool_ids, element(var.backend_pool_ids, count.index), null)
   probe_id                       = lookup(local.probe_ids, element(var.probe_ids, count.index), null)
   idle_timeout_in_minutes        = element(var.idle_timeout_in_minutes, count.index)
-  load_distribution              = element(var.load_distribution, count.index)
+  load_distribution              = element(var.load_distributions, count.index)
   enable_floating_ip             = var.enable_floating_ip
   depends_on                     = [azurerm_lb_probe.this]
 }
