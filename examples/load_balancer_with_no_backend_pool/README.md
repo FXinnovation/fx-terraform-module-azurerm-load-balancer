@@ -1,4 +1,4 @@
-# Public Load Balancer example
+# Load Balancer with no backend pool example
 ## Usage
 ```
 terraform init
@@ -28,10 +28,10 @@ terraform destroy
 
 | Name | Description |
 |------|-------------|
-| lb\_backend\_pool\_id | n/a |
+| lb\_backend\_pool\_ids | n/a |
 | lb\_backend\_pool\_ids\_map | n/a |
 | lb\_nat\_rule\_ids | n/a |
 | lb\_rule\_ids | n/a |
-| load\_balancer\_id | n/a |
+| load\_balancer\_ids | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
