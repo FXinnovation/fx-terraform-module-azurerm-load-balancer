@@ -28,10 +28,10 @@ terraform destroy
 
 | Name | Description |
 |------|-------------|
-| backend\_pool\_ids | n/a |
-| backend\_pool\_ids\_map | n/a |
+| lb\_backend\_pool\_ids | n/a |
+| lb\_backend\_pool\_ids\_map | n/a |
+| lb\_nat\_rule\_ids | n/a |
 | lb\_rule\_ids | n/a |
 | load\_balancer\_ids | n/a |
-| nat\_rule\_ids | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

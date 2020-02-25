@@ -55,12 +55,12 @@ variable "loadbalancer_name" {
   type        = string
 }
 
-variable "sku" {
+variable "lb_sku" {
   description = "The SKU of the Load Balancer."
   default     = "Basic"
 }
 
-variable "frontend_ip_configurations" {
+variable "lb_frontend_ip_configurations" {
   description = "One or more frontend IP configurations block. chaning this block will force to create new frontend IP configuration block to the Load Balancer."
   type        = list(object({ name = string, subnet_id = string, private_ip_address = string, public_ip_address_id = string }))
 }
@@ -74,12 +74,12 @@ variable "load_balancer_tags" {
 # Backend Address pool
 ###
 
-variable "backend_pool_enabled" {
+variable "lb_backend_pool_enabled" {
   description = "Boolean flag which describes whethere the Load balncer Backend pool is enabled or not."
   default     = false
 }
 
-variable "backend_pool_names" {
+variable "lb_backend_pool_names" {
   description = "List of names of the backend pools which will be created"
   type        = list(string)
   default     = []
@@ -89,42 +89,42 @@ variable "backend_pool_names" {
 # NAT pool
 ###
 
-variable "nat_pool_enabled" {
+variable "lb_nat_pool_enabled" {
   description = "Boolean flag to enable nat pool"
   default     = false
 }
 
-variable "nat_pool_names" {
+variable "lb_nat_pool_names" {
   description = "List of nat pool names for nat pool."
   type        = list(string)
   default     = [""]
 }
 
-variable "nat_pool_protocols" {
+variable "lb_nat_pool_protocols" {
   description = "List of nat pool protocols."
   type        = list(string)
   default     = [""]
 }
 
-variable "nat_pool_backend_ports" {
+variable "lb_nat_pool_backend_ports" {
   description = "List of back end ports for the NAT pool."
   type        = list(string)
   default     = [""]
 }
 
-variable "port_starts" {
+variable "lb_nat_pool_frontend_port_starts" {
   description = "List of frontend port start for NAT pool."
   type        = list(string)
   default     = [""]
 }
 
-variable "port_ends" {
+variable "lb_nat_pool_frontend_port_ends" {
   description = "List of the frontend port end for NAT pool."
   type        = list(string)
   default     = [""]
 }
 
-variable "nat_pool_frontend_ip_configuration_names" {
+variable "lb_nat_pool_frontend_ip_configuration_names" {
   description = "List of frotend IP configuration names to which the nat pool will be associated. Changing this will force to create new resource."
   type        = list(string)
   default     = [""]
@@ -135,36 +135,36 @@ variable "nat_pool_frontend_ip_configuration_names" {
 # NAT rule
 ###
 
-variable "nat_rule_enabled" {
+variable "lb_nat_rule_enabled" {
   description = "Boolean flag which describes whether or not to enable the nat rules."
   default     = false
 }
 
-variable "nat_rule_names" {
+variable "lb_nat_rule_names" {
   description = "List of names for the NAT rules."
   type        = list(string)
   default     = [""]
 }
 
-variable "nat_protocols" {
+variable "lb_nat_rule_protocols" {
   description = "List of NAT protocols which are associated to the rules."
   type        = list(string)
   default     = [""]
 }
 
-variable "nat_frontend_ports" {
+variable "lb_nat_rule_frontend_ports" {
   description = "List of frontend port which will be associated to the rules."
   type        = list(string)
   default     = [""]
 }
 
-variable "nat_backend_ports" {
+variable "lb_nat_rule_backend_ports" {
   description = "List of backend port which will be associated to the backend ports."
   type        = list(string)
   default     = [""]
 }
 
-variable "nat_rule_frontend_ip_configuration_names" {
+variable "lb_nat_rule_frontend_ip_configuration_names" {
   description = "List of frontend IP configuration names to which nat rule will be associated. Changing tis will force to create new resource."
   type        = list(string)
   default     = [""]
@@ -199,21 +199,59 @@ variable "lb_rule_backend_ports" {
   default     = [""]
 }
 
-variable "backend_pool_ids" {
+variable "lb_backend_pool_ids" {
   description = "List of backend pool ids to which the Load Balancer rule operates. Changing this will force to create new resource."
   type        = list(string)
   default     = [""]
 }
 
-variable "probe_ids" {
+variable "lb_probe_ids" {
   description = "List of probe ids to which the Load Balancer rule is attached. Changing this will force to create new resource."
   type        = list(string)
   default     = [""]
 }
 
-
 variable "lb_rule_frontend_ip_configuration_names" {
   description = "List of frontend ip configuration name to whcih the Load Balancer rule will be associated. Changing this will force to create new rule."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "lb_rule_idle_timeout_in_minutes" {
+  description = "List of timeouts for the TCP idle connection."
+  type        = list(number)
+  default     = [5]
+}
+
+variable "lb_rule_load_distributions" {
+  description = "List which specifies the load balancing distribution type to be used by the Load Balancer. Possible values are: `Default` – The load balancer is configured to use a 5 tuple hash to map traffic to available servers. `SourceIP` – The load balancer is configured to use a 2 tuple hash to map traffic to available servers. `SourceIPProtocol` – The load balancer is configured to use a 3 tuple hash to map traffic to available servers. Also known as Session Persistence, where the options are called `None`, `Client IP` and `Client IP and Protocol` respectively. "
+  type        = list(string)
+  default     = ["Default"]
+}
+
+variable "lb_rule_enable_floating_ip" {
+  description = "Enables the Floating IP Capacity, required to configure a SQL AlwaysOn Availability Group."
+  default     = false
+}
+
+###
+# Load Balancer probe
+###
+
+variable "lb_probe_names" {
+  description = "List of Load Balncer probe names that will be created. changing this will force to create new resource."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "lb_probe_ports" {
+  description = "List of ports on which the probe will queries the backend endpoint. possible values range from 1 to 65535, inclusive. "
+  type        = list(string)
+  default     = [""]
+}
+
+variable "lb_probe_protocols" {
+  description = "List of protocol of the end point. possible values are `Http`, `Https` or `Tcp`."
   type        = list(string)
   default     = [""]
 }
@@ -224,47 +262,7 @@ variable "lb_probe_interval_in_seconds" {
   default     = [5]
 }
 
-variable "idle_timeout_in_minutes" {
-  description = "List of timeouts for the Tcp idle connection."
-  type        = list(number)
-  default     = [5]
-}
-
-variable "load_distributions" {
-  description = "List which specifies the load balancing distribution type to be used by the Load Balancer. Possible values are: `Default` – The load balancer is configured to use a 5 tuple hash to map traffic to available servers. `SourceIP` – The load balancer is configured to use a 2 tuple hash to map traffic to available servers. `SourceIPProtocol` – The load balancer is configured to use a 3 tuple hash to map traffic to available servers. Also known as Session Persistence, where the options are called `None`, `Client IP` and `Client IP and Protocol` respectively. "
-  type        = list(string)
-  default     = ["Default"]
-}
-
-
-variable "enable_floating_ip" {
-  description = "Enables the Floating IP Capacity, required to configure a SQL AlwaysOn Availability Group."
-  default     = false
-}
-
-###
-# Load Balancer probe
-###
-
-variable "probe_names" {
-  description = "List of Load Balncer probe names that will be created. changing this will force to create new resource."
-  type        = list(string)
-  default     = [""]
-}
-
-variable "probe_ports" {
-  description = "List of ports on which the probe will queries the backend endpoint. possible values range from 1 to 65535, inclusive. "
-  type        = list(string)
-  default     = [""]
-}
-
-variable "probe_protocols" {
-  description = "List of protocol of the end point. possible values are `Http`, `Https` or `Tcp`."
-  type        = list(string)
-  default     = [""]
-}
-
-variable "request_paths" {
+variable "lb_probe_request_paths" {
   description = "List of URI used for requesting health status from the backend endpoint required if protocol is set to Http. Otherwise, it is not allowed. "
   type        = list(string)
   default     = [""]

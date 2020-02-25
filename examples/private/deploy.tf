@@ -35,31 +35,31 @@ module "private_lb" {
 
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
-  sku                 = "standard"
+  lb_sku              = "standard"
   loadbalancer_name   = "fxlb-private${random_string.this.result}"
   type                = "private"
-  frontend_ip_configurations = [
+  lb_frontend_ip_configurations = [
     { name = "fxtest${random_string.this.result}", subnet_id = "${azurerm_subnet.example.id}", private_ip_address = "10.0.1.25", public_ip_address_id = "" },
     { name = "fxterra${random_string.this.result}", subnet_id = "${azurerm_subnet.test.id}", private_ip_address = "10.0.2.8", public_ip_address_id = "" },
   ]
 
-  backend_pool_enabled                     = true
-  backend_pool_names                       = ["fxbackendtest"]
-  probe_names                              = ["boo"]
-  probe_protocols                          = ["HTTPS"]
-  probe_ports                              = ["80"]
-  request_paths                            = ["/"]
-  lb_rule_names                            = ["fxtftest"]
-  backend_pool_ids                         = ["fxbackendtest"]
-  lb_rule_protocols                        = ["TCP"]
-  lb_rule_frontend_ports                   = ["80"]
-  lb_rule_backend_ports                    = ["80"]
-  probe_ids                                = ["boo"]
-  lb_rule_frontend_ip_configuration_names  = ["fxterra${random_string.this.result}"]
-  nat_rule_enabled                         = true
-  nat_rule_names                           = ["foo"]
-  nat_protocols                            = ["Tcp"]
-  nat_frontend_ports                       = ["22"]
-  nat_backend_ports                        = ["22"]
-  nat_rule_frontend_ip_configuration_names = ["fxterra${random_string.this.result}"]
+  lb_backend_pool_enabled                     = true
+  lb_backend_pool_names                       = ["fxbackendtest"]
+  lb_probe_names                              = ["boo"]
+  lb_probe_protocols                          = ["HTTPS"]
+  lb_probe_ports                              = ["80"]
+  lb_probe_request_paths                      = ["/"]
+  lb_rule_names                               = ["fxtftest"]
+  lb_backend_pool_ids                         = ["fxbackendtest"]
+  lb_rule_protocols                           = ["TCP"]
+  lb_rule_frontend_ports                      = ["80"]
+  lb_rule_backend_ports                       = ["80"]
+  lb_probe_ids                                = ["boo"]
+  lb_rule_frontend_ip_configuration_names     = ["fxterra${random_string.this.result}"]
+  lb_nat_rule_enabled                         = true
+  lb_nat_rule_names                           = ["foo"]
+  lb_nat_protocols                            = ["Tcp"]
+  lb_nat_frontend_ports                       = ["22"]
+  lb_nat_backend_ports                        = ["22"]
+  lb_nat_rule_frontend_ip_configuration_names = ["fxterra${random_string.this.result}"]
 }
