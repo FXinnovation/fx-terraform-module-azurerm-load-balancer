@@ -58,8 +58,8 @@ module "private_lb" {
   lb_rule_frontend_ip_configuration_names     = ["fxterra${random_string.this.result}"]
   lb_nat_rule_enabled                         = true
   lb_nat_rule_names                           = ["foo"]
-  lb_nat_protocols                            = ["Tcp"]
-  lb_nat_frontend_ports                       = ["22"]
-  lb_nat_backend_ports                        = ["22"]
+  lb_nat_rule_protocols                       = ["Tcp"]
+  lb_nat_rule_frontend_ports                  = ["22"]
+  lb_nat_rule_backend_ports                   = ["22"]
   lb_nat_rule_frontend_ip_configuration_names = ["fxterra${random_string.this.result}"]
 }
