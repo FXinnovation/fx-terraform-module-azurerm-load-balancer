@@ -4,16 +4,23 @@
 See `examples` folders for usage of this module.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12 |
+| azurerm | >= 2.0.0 |
+
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azurerm | n/a |
+| azurerm | >= 2.0.0 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | enabled | Enable or disable module | `bool` | `true` | no |
 | lb\_backend\_pool\_enabled | Boolean flag which describes whethere the Load balncer Backend pool is enabled or not. | `bool` | `false` | no |
 | lb\_backend\_pool\_ids | List of backend pool ids to which the Load Balancer rule operates. Changing this will force to create new resource. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
